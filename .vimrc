@@ -116,30 +116,49 @@ let g:winManagerWindowLayout='FileExplorer|TagList'     "½«winmanagerÉèÖÃ³Éä¯ÀÀÆ
 nmap wm :WMToggle<cr>         "Ó³ÉäwinmanagerµÄ¿ì½İ¼ü
 
 "cscope
-set cscopequickfix=s-,c-,d-,i-,t-,e-    "Éè¶¨Ê¹ÓÃquickfix´°¿ÚÀ´ÏÔÊ¾cscopeµÄ½á¹û
-"Ó³ÉäcscopeµÄ¿ì½İ¼ü
-nmap <F5>s :cs find s <C-R>=expand("<cword>")<CR><CR> "²éÕÒCÓïÑÔ·ûºÅ£¬¼´²éÕÒº¯ÊıÃû¡¢ºê¡¢Ã¶¾ÙÖµµÈ³öÏÖµÄµØ·½
-nmap <F5>g :cs find g <C-R>=expand("<cword>")<CR><CR> "²éÕÒº¯Êı¡¢ºê¡¢Ã¶¾ÙµÈ¶¨ÒåµÄÎ»ÖÃ£¬ÀàËÆctagsËùÌá¹©µÄ¹¦ÄÜ
-nmap <F5>c :cs find c <C-R>=expand("<cword>")<CR><CR> "²éÕÒµ÷ÓÃ±¾º¯ÊıµÄº¯Êı
-nmap <F5>t :cs find t <C-R>=expand("<cword>")<CR><CR> "²éÕÒÖ¸¶¨µÄ×Ö·û´®
-nmap <F5>e :cs find e <C-R>=expand("<cword>")<CR><CR> "²éÕÒegrepÄ£Ê½£¬Ïàµ±ÓÚegrep¹¦ÄÜ£¬µ«²éÕÒËÙ¶È¿ì¶àÁË
-nmap <F5>f :cs find f <C-R>=expand("<cfile>")<CR><CR> "²éÕÒ²¢´ò¿ªÎÄ¼ş£¬ÀàËÆvimµÄfind¹¦ÄÜ
-nmap <F5>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "²éÕÒ°üº¬±¾ÎÄ¼şµÄÎÄ¼ş
-nmap <F5>d :cs find d <C-R>=expand("<cword>")<CR><CR> "²éÕÒ±¾º¯Êıµ÷ÓÃµÄº¯Êı
-
-"nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-"nmap <C-_>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR>
-"nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+if has("cscope")
+    if filereadable("cscope.out")
+        cs add cscope.out
+    else
+        let cscope_file=findfile("cscope.out",".;")
+        let cscope_pre=matchstr(cscope_file,".*/")
+        if !empty(cscope_file) && filereadable(cscope_file)
+            exec "cs add" cscope_file cscope_pre
+        endif
+    endif
+    set cscopequickfix=s-,c-,d-,i-,t-,e-    "Éè¶¨Ê¹ÓÃquickfix´°¿ÚÀ´ÏÔÊ¾cscopeµÄ½á¹û
+    "Ó³ÉäcscopeµÄ¿ì½İ¼ü
+    if &term == "screen"
+        nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> "²éÕÒCÓïÑÔ·ûºÅ£¬¼´²éÕÒº¯ÊıÃû¡¢ºê¡¢Ã¶¾ÙÖµµÈ³öÏÖµÄµØ·½
+        nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> "²éÕÒº¯Êı¡¢ºê¡¢Ã¶¾ÙµÈ¶¨ÒåµÄÎ»ÖÃ£¬ÀàËÆctagsËùÌá¹©µÄ¹¦ÄÜ
+        nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> "²éÕÒµ÷ÓÃ±¾º¯ÊıµÄº¯Êı
+        nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> "²éÕÒÖ¸¶¨µÄ×Ö·û´®
+        nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> "²éÕÒegrepÄ£Ê½£¬Ïàµ±ÓÚegrep¹¦ÄÜ£¬µ«²éÕÒËÙ¶È¿ì¶àÁË
+        nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> "²éÕÒ²¢´ò¿ªÎÄ¼ş£¬ÀàËÆvimµÄfind¹¦ÄÜ
+        nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "²éÕÒ°üº¬±¾ÎÄ¼şµÄÎÄ¼ş
+        nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR> "²éÕÒ±¾º¯Êıµ÷ÓÃµÄº¯Êı
+    else
+        nmap <F5>s :cs find s <C-R>=expand("<cword>")<CR><CR> "²éÕÒCÓïÑÔ·ûºÅ£¬¼´²éÕÒº¯ÊıÃû¡¢ºê¡¢Ã¶¾ÙÖµµÈ³öÏÖµÄµØ·½
+        nmap <F5>g :cs find g <C-R>=expand("<cword>")<CR><CR> "²éÕÒº¯Êı¡¢ºê¡¢Ã¶¾ÙµÈ¶¨ÒåµÄÎ»ÖÃ£¬ÀàËÆctagsËùÌá¹©µÄ¹¦ÄÜ
+        nmap <F5>c :cs find c <C-R>=expand("<cword>")<CR><CR> "²éÕÒµ÷ÓÃ±¾º¯ÊıµÄº¯Êı
+        nmap <F5>t :cs find t <C-R>=expand("<cword>")<CR><CR> "²éÕÒÖ¸¶¨µÄ×Ö·û´®
+        nmap <F5>e :cs find e <C-R>=expand("<cword>")<CR><CR> "²éÕÒegrepÄ£Ê½£¬Ïàµ±ÓÚegrep¹¦ÄÜ£¬µ«²éÕÒËÙ¶È¿ì¶àÁË
+        nmap <F5>f :cs find f <C-R>=expand("<cfile>")<CR><CR> "²éÕÒ²¢´ò¿ªÎÄ¼ş£¬ÀàËÆvimµÄfind¹¦ÄÜ
+        nmap <F5>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "²éÕÒ°üº¬±¾ÎÄ¼şµÄÎÄ¼ş
+        nmap <F5>d :cs find d <C-R>=expand("<cword>")<CR><CR> "²éÕÒ±¾º¯Êıµ÷ÓÃµÄº¯Êı
+    endif
+endif
 
 "Ó³ÉäQuickFixµÄ¿ì½İ¼ü
-nmap <F6> :cw<cr>        "´ò¿ªquickfix´°¿Ú
-nmap <F8> :cn<cr>        "Ç°Ò»Ïî
-nmap <F7> :cp<cr>        "ºóÒ»Ïî
+if &term == "screen"
+    nmap <C-\>w :cw<cr>        "´ò¿ªquickfix´°¿Ú
+    nmap <C-\>n :cn<cr>        "Ç°Ò»Ïî
+    nmap <C-\>p :cp<cr>        "ºóÒ»Ïî
+else
+    nmap <F5>w :cw<cr>        "´ò¿ªquickfix´°¿Ú
+    nmap <F5>n :cn<cr>        "Ç°Ò»Ïî
+    nmap <F5>p :cp<cr>        "ºóÒ»Ïî
+endif
 
 "MiniBufExp
 "let g:miniBufExplMapWindowNavVim = 1            "Ê¹ÓÃ<C-h,j,k,l>ÔÚ´°¿ÚÖ®¼äÒÆ¶¯
@@ -169,11 +188,19 @@ set completeopt=longest,menu
 "ÉèÖÃDoxygenµÄ×¢ÊÍ
 let g:DoxygenToolkit_authorName="JEMYZHANG" 
 "let g:DoxygenToolkit_briefTag_funcName = "yes"
-map <F4>a :DoxAuthor<cr>
-map <F4>f :Dox<cr>
-"map <F4>b :DoxBlock<cr>
-map <F4>v A //!< 
-map <F4>c O/** */<Left><Left>
+if &term == "screen"
+    map <C-x>a :DoxAuthor<cr>
+    map <C-x>f :Dox<cr>
+    "map <C-x>b :DoxBlock<cr>
+    map <C-x>v A //!< 
+    map <C-x>c O/** */<Left><Left>
+else
+    map <F4>a :DoxAuthor<cr>
+    map <F4>f :Dox<cr>
+    "map <F4>b :DoxBlock<cr>
+    map <F4>v A //!< 
+    map <F4>c O/** */<Left><Left>
+endif
 
 
 "ÉèÖÃrobixÔÄ¶ÁÊ±µÄctagsºÍcscopeµÄÉèÖÃ£¬ÓĞÊ±¼äĞ´Ò»¸ö½Å±¾×Ô¶¯ÉèÖÃ¡£
@@ -188,7 +215,14 @@ set autochdir
 "command -nargs=? W :w !sudo tee % > /dev/null
 
 "fuzzyfind
-nmap <F5>f :FufFile<cr>
-nmap <F5>b :FufBuffer<cr>
-nmap <F5>T :FufTag<cr>
-nmap <F5>t :FufTagWithCursorWord<cr>
+if &term == "screen"
+    nmap <C-f>f :FufFile<cr>
+    nmap <C-f>b :FufBuffer<cr>
+    nmap <C-f>T :FufTag<cr>
+    nmap <C-f>t :FufTagWithCursorWord<cr>
+else
+    nmap <F5>f :FufFile<cr>
+    nmap <F5>b :FufBuffer<cr>
+    nmap <F5>T :FufTag<cr>
+    nmap <F5>t :FufTagWithCursorWord<cr>
+endif
