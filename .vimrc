@@ -1,6 +1,19 @@
 
 " Vundle
 " git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+" Setting up Vundle - the vim plugin bundler
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+endif
+
+
 filetype off " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -29,6 +42,16 @@ Bundle 'DoxygenToolkit.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Mark'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'motemen/git-vim'
+Bundle 'Lokaltog/vim-easymotion'
+
+" Installing plugins the first time
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set helplang=cn            "使用中文帮助文档
@@ -37,7 +60,8 @@ set fileencodings=utf8,gbk    "支持打开gbk格式的文件
 
 colorscheme peaksea        "设置窗口颜色
 set background=dark
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 12    "设置字体为Bitstream Vera Sans Mono 12大小
+"设置字体为Bitstream Vera Sans Mono 12大小
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 12    
 "set guifont=Consolas:h12:cANSI
 set expandtab "使用SPACE代替Tab
 set tabstop=4            "设置tab的跳数
@@ -106,6 +130,8 @@ nmap ww    <C-w>w "切换窗口
 "--------------------------------------------------------------------------------------------------------
 "插件配置
 "--------------------------------------------------------------------------------------------------------
+"powerline
+let g:Powerline_symbols = 'fancy'
 
 "TList
 let Tlist_Show_One_File=1
@@ -129,14 +155,14 @@ if has("cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-    "设定使用quickfix窗口来显示cscope的结果
     "映射cscope的快捷键
     if &term == "screen"
-        nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
-        nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
-        nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR> "查找调用本函数的函数
-        nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR> "查找指定的字符串
-        nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR> "查找egrep模式，相当于egrep功能，但查找速度快多了
-        nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR> "查找并打开文件，类似vim的find功能
-        nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找包含本文件的文件
-        nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR> "查找本函数调用的函数
+        nmap <leader>cs :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
+        nmap <leader>cg :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
+        nmap <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR> "查找调用本函数的函数
+        nmap <leader>ct :cs find t <C-R>=expand("<cword>")<CR><CR> "查找指定的字符串
+        nmap <leader>ce :cs find e <C-R>=expand("<cword>")<CR><CR> "查找egrep模式，相当于egrep功能，但查找速度快多了
+        nmap <leader>cf :cs find f <C-R>=expand("<cfile>")<CR><CR> "查找并打开文件，类似vim的find功能
+        nmap <leader>ci :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找包含本文件的文件
+        nmap <leader>cd :cs find d <C-R>=expand("<cword>")<CR><CR> "查找本函数调用的函数
     else
         nmap <F5>s :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
         nmap <F5>g :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
@@ -151,9 +177,9 @@ endif
 
 "映射QuickFix的快捷键
 if &term == "screen"
-    nmap <C-\>w :cw<cr>        "打开quickfix窗口
-    nmap <C-\>n :cn<cr>        "前一项
-    nmap <C-\>p :cp<cr>        "后一项
+    nmap <leader>cw :cw<cr>        "打开quickfix窗口
+    nmap <leader>cn :cn<cr>        "前一项
+    nmap <leader>cp :cp<cr>        "后一项
 else
     nmap <F5>w :cw<cr>        "打开quickfix窗口
     nmap <F5>n :cn<cr>        "前一项
@@ -189,11 +215,11 @@ set completeopt=longest,menu
 let g:DoxygenToolkit_authorName="JEMYZHANG" 
 "let g:DoxygenToolkit_briefTag_funcName = "yes"
 if &term == "screen"
-    map <C-x>a :DoxAuthor<cr>
-    map <C-x>f :Dox<cr>
-    "map <C-x>b :DoxBlock<cr>
-    map <C-x>v A //!< 
-    map <C-x>c O/** */<Left><Left>
+    map <leader>xa :DoxAuthor<cr>
+    map <leader>xf :Dox<cr>
+    "map <leader>xb :DoxBlock<cr>
+    map <leader>xv A //!< 
+    map <leader>xc O/** */<Left><Left>
 else
     map <F4>a :DoxAuthor<cr>
     map <F4>f :Dox<cr>
@@ -216,13 +242,13 @@ set autochdir
 
 "fuzzyfind
 if &term == "screen"
-    nmap <C-f>f :FufFile<cr>
-    nmap <C-f>b :FufBuffer<cr>
-    nmap <C-f>T :FufTag<cr>
-    nmap <C-f>t :FufTagWithCursorWord<cr>
+    nmap <leader>ff :FufFile<cr>
+    nmap <leader>fb :FufBuffer<cr>
+    nmap <leader>ft :FufTag<cr>
+    nmap <leader>fT :FufTagWithCursorWord<cr>
 else
     nmap <F5>f :FufFile<cr>
     nmap <F5>b :FufBuffer<cr>
-    nmap <F5>T :FufTag<cr>
-    nmap <F5>t :FufTagWithCursorWord<cr>
+    nmap <F5>t :FufTag<cr>
+    nmap <F5>T :FufTagWithCursorWord<cr>
 endif
