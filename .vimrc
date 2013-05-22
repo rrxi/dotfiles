@@ -45,6 +45,7 @@ Bundle 'Mark'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'motemen/git-vim'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-fugitive' 
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -60,6 +61,7 @@ set fileencodings=utf8,gbk    "支持打开gbk格式的文件
 
 colorscheme peaksea        "设置窗口颜色
 set background=dark
+hi Normal ctermbg=none
 "设置字体为Bitstream Vera Sans Mono 12大小
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 12    
 "set guifont=Consolas:h12:cANSI
@@ -155,14 +157,14 @@ if has("cscope")
     set cscopequickfix=s-,c-,d-,i-,t-,e-    "设定使用quickfix窗口来显示cscope的结果
     "映射cscope的快捷键
     if &term == "screen"
-        nmap <leader>cs :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
-        nmap <leader>cg :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
-        nmap <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR> "查找调用本函数的函数
-        nmap <leader>ct :cs find t <C-R>=expand("<cword>")<CR><CR> "查找指定的字符串
-        nmap <leader>ce :cs find e <C-R>=expand("<cword>")<CR><CR> "查找egrep模式，相当于egrep功能，但查找速度快多了
-        nmap <leader>cf :cs find f <C-R>=expand("<cfile>")<CR><CR> "查找并打开文件，类似vim的find功能
-        nmap <leader>ci :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找包含本文件的文件
-        nmap <leader>cd :cs find d <C-R>=expand("<cword>")<CR><CR> "查找本函数调用的函数
+        nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
+        nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
+        nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR> "查找调用本函数的函数
+        nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR> "查找指定的字符串
+        nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR> "查找egrep模式，相当于egrep功能，但查找速度快多了
+        nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR> "查找并打开文件，类似vim的find功能
+        nmap <C-c>i :cs find i <C-R>=expand("<cfile>")<CR>$<CR> "查找包含本文件的文件
+        nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR> "查找本函数调用的函数
     else
         nmap <F5>s :cs find s <C-R>=expand("<cword>")<CR><CR> "查找C语言符号，即查找函数名、宏、枚举值等出现的地方
         nmap <F5>g :cs find g <C-R>=expand("<cword>")<CR><CR> "查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
@@ -177,9 +179,9 @@ endif
 
 "映射QuickFix的快捷键
 if &term == "screen"
-    nmap <leader>cw :cw<cr>        "打开quickfix窗口
-    nmap <leader>cn :cn<cr>        "前一项
-    nmap <leader>cp :cp<cr>        "后一项
+    nmap <C-c>w :cw<cr>        "打开quickfix窗口
+    nmap <C-c>n :cn<cr>        "前一项
+    nmap <C-c>p :cp<cr>        "后一项
 else
     nmap <F5>w :cw<cr>        "打开quickfix窗口
     nmap <F5>n :cn<cr>        "前一项
