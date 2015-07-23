@@ -39,13 +39,18 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'echofunc.vim'
 Bundle 'DoxygenToolkit.vim'
+"fugitive: required by powerline
+Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Mark'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'motemen/git-vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-fugitive' 
+"Bundle 'motemen/git-vim'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'plasticboy/vim-markdown'
+"Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+Bundle 'DrawIt'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -63,12 +68,21 @@ colorscheme peaksea        "设置窗口颜色
 set background=dark
 hi Normal ctermbg=none
 "设置字体为Bitstream Vera Sans Mono 12大小
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 12    
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 10    
 "set guifont=Consolas:h12:cANSI
 set expandtab "使用SPACE代替Tab
 set tabstop=4            "设置tab的跳数
 set shiftwidth=4 "自动缩进宽度
 set backspace=2            "设置退格键可用
+
+augroup filetype
+    autocmd BufNewFile,BufRead Makefile set filetype=make
+    autocmd BufNewFile,BufRead makefile.inc set filetype=make
+    autocmd BufNewFile,BufRead *.make set filetype=make
+    autocmd BufNewFile,BufRead *.mk set filetype=make
+augroup END
+
+autocmd FileType make setlocal noexpendtab "Makefile不使用Space代替Tab
 set nu!                    "设置显示行号
 set wrap                "设置自动换行
 "set nowrap                "设置不自动换行
@@ -254,3 +268,6 @@ else
     nmap <F5>t :FufTag<cr>
     nmap <F5>T :FufTagWithCursorWord<cr>
 endif
+
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_global_ycm_extra_conf = '~/workspace/HiviewDtvMagus/.ycm_extra_conf.py'
