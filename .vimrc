@@ -40,8 +40,9 @@ Bundle 'FuzzyFinder'
 Bundle 'echofunc.vim'
 Bundle 'DoxygenToolkit.vim'
 "fugitive: required by powerline
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Mark'
 Bundle 'airblade/vim-gitgutter'
@@ -51,6 +52,8 @@ Bundle 'airblade/vim-gitgutter'
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'DrawIt'
+"Bundle 'xolox/vim-easytags'
+"Bundle 'xolox/vim-misc'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -61,14 +64,17 @@ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set helplang=cn            "使用中文帮助文档
+set encoding=utf-8
 "set fileencoding=gbk       "查看utf-8格式的帮助文档
 set fileencodings=utf8,gbk    "支持打开gbk格式的文件
 
 colorscheme peaksea        "设置窗口颜色
-set background=dark
-hi Normal ctermbg=none
+set bg=dark
+hi Normal			ctermfg=Gray	ctermbg=NONE				guifg=Gray	guibg=#00002A
+"hi Normal ctermbg=none
 "设置字体为Bitstream Vera Sans Mono 12大小
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 10    
+"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10    
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
 "set guifont=Consolas:h12:cANSI
 set expandtab "使用SPACE代替Tab
 set tabstop=4            "设置tab的跳数
@@ -147,7 +153,7 @@ nmap ww    <C-w>w "切换窗口
 "插件配置
 "--------------------------------------------------------------------------------------------------------
 "powerline
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols='fancy'
 
 "TList
 let Tlist_Show_One_File=1
@@ -271,3 +277,4 @@ endif
 
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_global_ycm_extra_conf = '~/workspace/HiviewDtvMagus/.ycm_extra_conf.py'
+
