@@ -28,11 +28,11 @@ Bundle 'peaksea'
 Bundle 'stlrefvim'
 Bundle 'a.vim'
 Bundle 'c.vim'
-Bundle 'OmniCppComplete'
+"Bundle 'OmniCppComplete'
 Bundle 'grep.vim'
 Bundle 'taglist.vim'
 Bundle 'winmanager'
-"Bundle 'minibufexpl.vim'
+"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'genutils'
 "Bundle 'lookupfile'
 Bundle 'L9'
@@ -45,7 +45,7 @@ Bundle 'DoxygenToolkit.vim'
 Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'Mark'
-Bundle 'airblade/vim-gitgutter'
+"Bundle 'airblade/vim-gitgutter'
 "Bundle 'motemen/git-vim'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'plasticboy/vim-markdown'
@@ -54,6 +54,12 @@ Bundle 'scrooloose/syntastic'
 Bundle 'DrawIt'
 "Bundle 'xolox/vim-easytags'
 "Bundle 'xolox/vim-misc'
+Bundle 'tpope/vim-obsession'
+Bundle 'dhruvasagar/vim-prosession'
+Bundle 'kshenoy/vim-signature'
+"Clang format
+Bundle 'kana/vim-operator-user'
+Bundle 'rhysd/vim-clang-format'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -63,14 +69,14 @@ if iCanHazVundle == 0
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set helplang=cn            "使用中文帮助文档
 set encoding=utf-8
+set helplang=cn            "使用中文帮助文档
 "set fileencoding=gbk       "查看utf-8格式的帮助文档
 set fileencodings=utf8,gbk    "支持打开gbk格式的文件
 
 colorscheme peaksea        "设置窗口颜色
-set bg=dark
-hi Normal			ctermfg=Gray	ctermbg=NONE				guifg=Gray	guibg=#00002A
+set background=dark
+hi Normal           ctermfg=Gray    ctermbg=NONE                guifg=Gray  guibg=#00002A
 "hi Normal ctermbg=none
 "设置字体为Bitstream Vera Sans Mono 12大小
 "set guifont=Bitstream\ Vera\ Sans\ Mono\ 10    
@@ -88,7 +94,7 @@ augroup filetype
     autocmd BufNewFile,BufRead *.mk set filetype=make
 augroup END
 
-autocmd FileType make setlocal noexpendtab "Makefile不使用Space代替Tab
+autocmd FileType make setlocal noexpandtab "Makefile不使用Space代替Tab
 set nu!                    "设置显示行号
 set wrap                "设置自动换行
 "set nowrap                "设置不自动换行
@@ -147,6 +153,10 @@ nmap wv        <C-w>v        "垂直分割当前窗口
 nmap wc     <C-w>c        "关闭当前窗口
 nmap ws        <C-w>s        "水平分割当前窗口
 nmap ww    <C-w>w "切换窗口
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w, :vertical resize -3<CR>
+nmap w. :vertical resize +3<CR>
 "nmap mru  :MRU<CR> "打开最近文件
 
 "--------------------------------------------------------------------------------------------------------
@@ -162,6 +172,10 @@ let Tlist_Exit_OnlyWindow=1    "设置Tlist
 "winmannger
 let g:winManagerWindowLayout='FileExplorer|TagList'     "将winmanager设置成浏览器和TagList的组合
 nmap wm :WMToggle<cr>         "映射winmanager的快捷键
+
+if exists('$TMUX')
+    set term=screen-256color
+endif
 
 "cscope
 if has("cscope")
@@ -221,7 +235,7 @@ let g:buftabs_in_statusline=1
 
 "A
 nnoremap <silent> <F9> :AV<cr>       "将F9设置成头/源文件切换的快捷键,将窗口分为左右两个窗口，并打开.h/.c文件
-let g:alternateSearchPath = 'sfr:./,sfr:../include,sfr:../../include,sfr:../source,sfr:../src,sfr:../inc'
+let g:alternateSearchPath = 'sfr:./,sfr:../include,sfr:../../include,sfr:../source,sfr:../src,sfr:../inc,sfr:../Inc'
 
 "Grep
 "将F3设置成Grep查找的快捷键
@@ -234,7 +248,7 @@ set completeopt=longest,menu
 "let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "设置Doxygen的注释
-let g:DoxygenToolkit_authorName="JEMYZHANG" 
+let g:DoxygenToolkit_authorName="JemyZhang" 
 "let g:DoxygenToolkit_briefTag_funcName = "yes"
 if &term == "screen"
     map <leader>xa :DoxAuthor<cr>
@@ -266,15 +280,32 @@ set autochdir
 if &term == "screen"
     nmap <leader>ff :FufFile<cr>
     nmap <leader>fb :FufBuffer<cr>
-    nmap <leader>ft :FufTag<cr>
+    nmap <leader>ft :FufBufferTag<cr>
     nmap <leader>fT :FufTagWithCursorWord<cr>
 else
     nmap <F5>f :FufFile<cr>
     nmap <F5>b :FufBuffer<cr>
-    nmap <F5>t :FufTag<cr>
+    nmap <F5>t :FufBufferTag<cr>
     nmap <F5>T :FufTagWithCursorWord<cr>
 endif
+
+"paste mode
+set pastetoggle=<F10>
 
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:ycm_global_ycm_extra_conf = '~/workspace/HiviewDtvMagus/.ycm_extra_conf.py'
 
+"Clang format
+let g:clang_format#command = 'clang-format-3.6'
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
+let g:clang_format#auto_format_on_insert_leave = 1
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+"autocmd FileType c ClangFormatAutoEnable
