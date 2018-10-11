@@ -4,3 +4,12 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "zsh-autosuggestions"]
+    path = oh-my-zsh/plugins/zsh-autosuggestions
+    url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh-syntax-highlighting"]
+    path = oh-my-zsh/plugins/zsh-syntax-highlighting
+    url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "zsh-completions"]
+    path = oh-my-zsh/plugins/zsh-completions
+    url = https://github.com/zsh-users/zsh-completions

@@ -50,7 +50,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump zsh-navigation-tools command-not-found fancy-ctrl-z catimg)
+plugins=(git autojump zsh-navigation-tools command-not-found fancy-ctrl-z catimg zsh-autosuggestions zsh-syntax-highlighting zsh-completions)
 
 # User configuration
 
@@ -89,5 +89,13 @@ alias grepc="grep --exclude={'cscope*','*tags*','*test*.*','*.o','*.so','*.patch
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
+
 autoload bashcompinit
 bashcompinit
+autoload -U compinit && compinit -u
+
+export PATH=$PATH:$HOME/.local/bin
+
