@@ -8,11 +8,7 @@ git submodule init
 git submodule update --remote --recursive
 
 # zsh
-if [ -d $HOME/.oh-my-zsh ]; then
-  mv $HOME/.oh-my-zsh $HOME/.oh-my-zsh.old
-fi
-
-ln -s $CURRENT_DIR/oh-my-zsh $HOME/.oh-my-zsh
+ln -s $CURRENT_DIR/antigen.zsh $HOME/.antigen.zsh
 
 if [ -f $HOME/.zshrc ]; then
   mv $HOME/.zshrc $HOME/.zshrc.old
