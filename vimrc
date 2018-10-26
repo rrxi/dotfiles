@@ -69,6 +69,7 @@ Bundle 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'ntpeters/vim-better-whitespace'
 
 " Installing plugins the first time
 if iCanHazVundle == 0
@@ -78,7 +79,7 @@ if iCanHazVundle == 0
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set encoding=utf-8
+set encoding=utf-8
 "set helplang=cn            "使用中文帮助文档
 "set fileencoding=gbk       "查看utf-8格式的帮助文档
 set fileencodings=utf8,gbk    "支持打开gbk格式的文件
@@ -88,7 +89,7 @@ set background=dark
 hi Normal           ctermfg=Gray    ctermbg=NONE                guifg=Gray  guibg=#00002A
 "hi Normal ctermbg=none
 "设置字体为Bitstream Vera Sans Mono 12大小
-"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10    
+"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
 "set guifont=Consolas:h12:cANSI
 set expandtab "使用SPACE代替Tab
@@ -114,7 +115,7 @@ set whichwrap=b,s,<,>,[,]    "光标可以从行首和行尾跳到另一行去
 "set autochdir            "自动设置当前目录为正在编辑的目录
 autocmd BufEnter * silent! lcd %:p:h
 set hidden                "自动隐藏没有保存的缓冲区,切换buffer时不给出保存当前buffer的提示
-set scrolloff=5            "在光标接近底端或顶端时,自动下滚或上滚. 
+set scrolloff=5            "在光标接近底端或顶端时,自动下滚或上滚.
 "设置无备份文件
 set nobackup
 set nowritebackup
@@ -262,19 +263,19 @@ set completeopt=longest,menu
 "let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
 "设置Doxygen的注释
-let g:DoxygenToolkit_authorName="JemyZhang" 
+let g:DoxygenToolkit_authorName="JemyZhang"
 "let g:DoxygenToolkit_briefTag_funcName = "yes"
 if &term == "screen"
     map <leader>xa :DoxAuthor<cr>
     map <leader>xf :Dox<cr>
     "map <leader>xb :DoxBlock<cr>
-    map <leader>xv A //!< 
+    map <leader>xv A //!<
     map <leader>xc O/** */<Left><Left>
 else
     map <F4>a :DoxAuthor<cr>
     map <F4>f :Dox<cr>
     "map <F4>b :DoxBlock<cr>
-    map <F4>v A //!< 
+    map <F4>v A //!<
     map <F4>c O/** */<Left><Left>
 endif
 
@@ -351,3 +352,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
+
+"Better whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
