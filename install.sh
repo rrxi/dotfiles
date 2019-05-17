@@ -8,13 +8,13 @@ git submodule init
 git submodule update --remote --recursive
 
 # zsh
-ln -s $CURRENT_DIR/antigen.zsh $HOME/.antigen.zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 
 if [ -f $HOME/.zshrc ]; then
   mv $HOME/.zshrc $HOME/.zshrc.old
 fi
 
-ln -s $CURRENT_DIR/zshrc $HOME/.zshrc
+ln -sf $CURRENT_DIR/zshrc $HOME/.zshrc
 
 # vi
 if [ -e $HOME/.vimrc ]; then
