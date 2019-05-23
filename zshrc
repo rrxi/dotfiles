@@ -1,6 +1,7 @@
 alias tmux="tmux -2"
 alias grepc="grep --exclude={'cscope*','*tags*','*test*.*','*.o','*.so','*.patch','.*.cmd','*.ko','*.img'} --exclude-dir={out}"
 
+export PATH=$HOME/.local/bin:$PATH
 [ -f ~/.zshrc_export ] && source ~/.zshrc_export
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
