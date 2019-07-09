@@ -16,6 +16,13 @@ fi
 
 ln -sf $CURRENT_DIR/zshrc $HOME/.zshrc
 
+#nvim
+if [ -e $HOME/.config/nvim ]; then
+  mv $HOME/.config/nvim $HOME/.config/nvim.old
+fi
+
+ln -sf $CURRENT_DIR/nvim $HOME/.config/nvim
+
 # vi
 if [ -e $HOME/.vimrc ]; then
   mv $HOME/.vimrc $HOME/.vimrc.old

@@ -1,9 +1,3 @@
-alias tmux="tmux -2"
-alias grepc="grep --exclude={'cscope*','*tags*','*test*.*','*.o','*.so','*.patch','.*.cmd','*.ko','*.img'} --exclude-dir={out}"
-
-export PATH=$HOME/.local/bin:$PATH
-[ -f ~/.zshrc_export ] && source ~/.zshrc_export
-
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
@@ -66,3 +60,9 @@ zplugin load zdharma/history-search-multi-word
 #
 #zplugin load agkozak/agkozak-zsh-prompt
 #
+
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
+[ -f $HOME/.zshrc_export ] && source $HOME/.zshrc_export
+
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

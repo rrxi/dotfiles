@@ -47,5 +47,8 @@ let g:deoplete#enable_at_startup = 1
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
+Plug 'scrooloose/vim-slumlord'
+Plug 'aklt/plantuml-syntax'
+
 
 call plug#end()
