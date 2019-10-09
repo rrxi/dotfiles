@@ -3,16 +3,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 " My Bundles here:
 Plug 'iCyMind/NeoSolarized'
 Plug 'jremmen/vim-ripgrep'
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/xml.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'vim-scripts/xml.vim'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -50,5 +50,18 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'scrooloose/vim-slumlord'
 Plug 'aklt/plantuml-syntax'
 
+if executable('ctags')
+  Plug 'tracyone/fzf-funky',{'on': 'CtrlPFunky'}
+  nnoremap <Leader>pk :CtrlPFunky<cr>
+  nnoremap <c-k> :CtrlPFunky<cr>
+else
+  nnoremap <Leader>pk :BTags<cr>
+  nnoremap <c-k> :BTags<cr>
+endif
+
+Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'kshenoy/vim-signature'
+
+Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()

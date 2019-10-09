@@ -66,3 +66,5 @@ zplugin load zdharma/history-search-multi-word
 [ -f $HOME/.zshrc_export ] && source $HOME/.zshrc_export
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

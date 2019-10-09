@@ -35,6 +35,7 @@ if [ -e $HOME/.tmux.conf ]; then
   mv $HOME/.tmux.conf $HOME/.tmux.conf.old
 fi
 
+tic -x $CURRENT_DIR/tmux-256color.terminfo
 ln -sf $CURRENT_DIR/tmux.conf $HOME/.tmux.conf
 
 # font
