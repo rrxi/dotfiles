@@ -17,6 +17,8 @@ fi
 ln -sf $CURRENT_DIR/zshrc $HOME/.zshrc
 
 #nvim
+curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if [ -e $HOME/.config/nvim ]; then
   mv $HOME/.config/nvim $HOME/.config/nvim.old
 fi
@@ -24,6 +26,8 @@ fi
 ln -sf $CURRENT_DIR/nvim $HOME/.config/nvim
 
 # vi
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if [ -e $HOME/.vimrc ]; then
   mv $HOME/.vimrc $HOME/.vimrc.old
 fi
