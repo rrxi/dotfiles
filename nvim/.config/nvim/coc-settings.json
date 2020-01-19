@@ -1,0 +1,25 @@
+{
+	"suggest.noselect": false,
+	"suggest.timeout": 500,
+	"suggest.snippetIndicator": "⭐",
+	"diagnostic.virtualText": true,
+  "list.source.tags.command": "ctags -R .",
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"filetypes": ["c", "cpp", "cc"],
+			"rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		},
+		"bash": {
+			"command": "bash-language-server",
+			"args": ["start"],
+			"filetypes": ["sh"],
+			"ignoredRootPaths": []
+		}
+  }
+}
