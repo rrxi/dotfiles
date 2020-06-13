@@ -1,3 +1,5 @@
-[submodule "fonts"]
-	path = fonts
-	url = https://github.com/powerline/fonts.git
+[submodule "nvim/.config/nvim"]
+	path = nvim/.config/nvim
+	url = https://github.com/jemyzhang/vime
+	depth = 1
+    branch = trunk

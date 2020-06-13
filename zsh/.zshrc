@@ -6,9 +6,9 @@ export EDITOR='vim'
 
 
 ### Added by Zplugin's installer
-source $HOME/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zplugin's installer chunk
 
 #
@@ -39,7 +39,8 @@ zplugin snippet OMZ::lib/theme-and-appearance.zsh
 
 zplugin snippet OMZ::plugins/autojump/autojump.plugin.zsh
 zplugin snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
-zplugin snippet OMZ::plugins/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+
+zplugin load psprint/zsh-navigation-tools
 ## Load the theme.
 zplugin snippet OMZ::themes/ys.zsh-theme
 #
