@@ -30,7 +30,7 @@ echo "Backup old dotfiles to $dotfile_backup_dir"
 pushd $HOME > /dev/null 2>&1
 rm -rf $dotfile_backup_dir
 mkdir -p $dotfile_backup_dir
-for f in .gitignore_global .zshrc .vimrc .config/nvim .tmux.conf; do
+for f in .gitignore_global .zshrc .vimrc .config/nvim .tmux.conf .tmux.conf.local; do
     if [ -e $f -o -L $f ]; then
         mv $f $dotfile_backup_dir
     fi

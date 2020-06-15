@@ -3,3 +3,8 @@
 	url = https://github.com/jemyzhang/vime
 	depth = 1
     branch = trunk
+[submodule "tmux/.tmux"]
+	path = tmux/.tmux
+	url = https://github.com/jemyzhang/.tmux
+    depth = 1
+    branch = trunk
