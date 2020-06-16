@@ -14,7 +14,7 @@ echo "Setting up mirrors of npmjs..."
 if hash yarn > /dev/null 2>&1; then
     yarn config set registry $npm_mirrorsite
 fi
-if hash yarn > /dev/null 2>&1; then
+if hash npm > /dev/null 2>&1; then
     npm config set registry $npm_mirrorsite
 fi
 
