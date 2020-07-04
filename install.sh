@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+function realpath() {
+	[[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 CURRENT_DIR=$(realpath $(dirname $(readlink -f ${BASH_SOURCE[0]:-$0})))
 
 pushd $CURRENT_DIR > /dev/null 2>&1
